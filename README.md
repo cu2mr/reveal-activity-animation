@@ -25,7 +25,6 @@ After you have to create special root layout to show in behind current Circular 
                 android:layout_marginLeft="10dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/d1"/>
-    
             <TextView
                 android:text="@string/hello_world"
                 android:layout_width="wrap_content"
@@ -34,10 +33,9 @@ After you have to create special root layout to show in behind current Circular 
     
         </FrameLayout>
     
-    
     </com.angelocyj.library.circularReveal.widget.RevealFrameLayout>
 
-
+depends on Ozo
 
                 startActivity(new Intent(MainActivity.this, DetailActivity.class).putExtra(RevealActivityAnimationHelper.KEY_REVEAL_ACTIVITY_HELPER,
                         new RevealActivityAnimationHelper((ImageView) view, String.valueOf(mResArray[position]))));
