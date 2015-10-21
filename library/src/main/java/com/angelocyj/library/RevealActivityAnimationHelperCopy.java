@@ -10,10 +10,7 @@ import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.webkit.URLUtil;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.angelocyj.library.circularReveal.animation.SupportAnimator;
 import com.angelocyj.library.circularReveal.animation.ViewAnimationUtils;
@@ -31,7 +28,7 @@ import java.io.Serializable;
  * 创建人：angelo
  * 创建时间：9/10/15 2:19 PM
  */
-public class RevealActivityAnimationHelper implements Serializable {
+public class RevealActivityAnimationHelperCopy implements Serializable {
     public static final String KEY_REVEAL_ACTIVITY_HELPER = "REVEAL_ACTIVITY_HELPER";
     private static final int DEFAULT_TRANSFORM_TIME = 500;
     // Default reveal color
@@ -60,11 +57,11 @@ public class RevealActivityAnimationHelper implements Serializable {
     private int mTargetParentViewHeight;
 
 
-    public RevealActivityAnimationHelper(ImageView sourceView) {
+    public RevealActivityAnimationHelperCopy(View sourceView) {
         this(sourceView, null);
     }
 
-    public RevealActivityAnimationHelper(ImageView sourceView, String imageUrl) {
+    public RevealActivityAnimationHelperCopy(View sourceView, String imageUrl) {
         this.mImageUrl = imageUrl;
         int location[] = new int[2];
         sourceView.getLocationOnScreen(location);
@@ -84,7 +81,7 @@ public class RevealActivityAnimationHelper implements Serializable {
      * @param targetView 目标控件，视觉效果从前一个activity移动到新activity，层级有限制，与mContentView最多隔2级
      * @param background 根布局背景，辅助alpha过度呈现
      */
-    public void onActivityCreate(final ViewGroup rootView, final ImageView targetView, final Drawable background) {
+    public void onActivityCreate(final ViewGroup rootView, final View targetView, final Drawable background) {
 
         targetView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
@@ -95,6 +92,18 @@ public class RevealActivityAnimationHelper implements Serializable {
 //                    mTargetCircleImageViewBorderWidth = ((CircleImageView) targetView).getBorderWidth();
 //                    ((CircleImageView) targetView).setBorderWidth(mSourceCircleImageViewBorderWidth);
 //                }
+
+                if (!TextUtils.isEmpty(mImageUrl)) {
+                    if (URLUtil.isNetworkUrl(mImageUrl)){
+//                    new BitmapTools(CommonApp.getApp()).display(targetView, mImageUrl, BitmapTools.SizeType.SMALL);
+                        Glide.with(rootView.getContext()).load(mImageUrl).into((ImageView)targetView);
+                    } else {
+                        if (targetView instanceof ImageView) {
+                            ((ImageView) targetView).setImageResource(Integer.valueOf(mImageUrl));
+                        }
+
+                    }
+                }
 
                 int location[] = new int[2];
                 targetView.getLocationOnScreen(location);
@@ -120,66 +129,37 @@ public class RevealActivityAnimationHelper implements Serializable {
         });
     }
 
-    private void activityEnterAnim(final ViewGroup rootView, final ImageView targetView, final Drawable background) {
+    private void activityEnterAnim(final ViewGroup rootView, final View targetView, final Drawable background) {
         // 根布局下的第一个子布局，用于呈现内容
         final ViewGroup contentView = (ViewGroup) rootView.getChildAt(0);
 
         UIUtil.invisibleChildrenView(contentView);
         final ViewGroup targetParentView = (ViewGroup) targetView.getParent();
         final Drawable parentBackground = targetParentView.getBackground();
-        if (targetParentView != contentView) {
-            targetParentView.setVisibility(View.VISIBLE);
-            mTargetParentViewHeight = targetParentView.getHeight();
-            targetParentView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
-            UIUtil.invisibleChildrenView(targetParentView);
-            targetParentView.setBackgroundDrawable(null);
-        }
+//        if (targetParentView != contentView) {
+//            targetParentView.setVisibility(View.VISIBLE);
+//            mTargetParentViewHeight = targetParentView.getHeight();
+//            targetParentView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
+//            UIUtil.invisibleChildrenView(targetParentView);
+//            targetParentView.setBackgroundDrawable(null);
+//        }
 
-//        targetView.setVisibility(View.VISIBLE);
-
-        // create new imageView as temp view
+        targetView.setVisibility(View.VISIBLE);
+//        View tempTargetView = new ImageView();
         final ImageView tempTargetView = new ImageView(rootView.getContext());
-        if (!TextUtils.isEmpty(mImageUrl)) {
-            if (URLUtil.isNetworkUrl(mImageUrl)){
-                Glide.with(rootView.getContext()).load(mImageUrl).into(targetView);
-                Glide.with(rootView.getContext()).load(mImageUrl).into(tempTargetView);
-            } else {
-                targetView.setImageResource(Integer.valueOf(mImageUrl));
-                tempTargetView.setImageResource(Integer.valueOf(mImageUrl));
-            }
-        }
-
-        int rootLocation[] = new int[2];
-        int targetLocation[] = new int[2];
-        rootView.getLocationOnScreen(rootLocation);
-        targetView.getLocationOnScreen(targetLocation);
-        FrameLayout.LayoutParams params;
-        if (targetParentView instanceof FrameLayout) {
-            params = (FrameLayout.LayoutParams) targetView.getLayoutParams();
-        } else if (targetParentView instanceof LinearLayout) {
-            LinearLayout.LayoutParams originalParams = (LinearLayout.LayoutParams) targetView.getLayoutParams();
-            params = new FrameLayout.LayoutParams(originalParams.width, originalParams.height);
-        } else if (targetParentView instanceof RelativeLayout) {
-            RelativeLayout.LayoutParams originalParams = (RelativeLayout.LayoutParams) targetView.getLayoutParams();
-            params = new FrameLayout.LayoutParams(originalParams.width, originalParams.height);
-        } else {
-            params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        }
-        params.leftMargin = targetLocation[0] - rootLocation[0];
-        params.topMargin = targetLocation[1] - rootLocation[1];
-        tempTargetView.setLayoutParams(params);
-        tempTargetView.setScaleType(targetView.getScaleType());
-
+        tempTargetView.setLayoutParams(targetView.getLayoutParams());
+        tempTargetView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        tempTargetView.setImageResource(Integer.valueOf(mImageUrl));
         rootView.addView(tempTargetView);
 
-        ViewHelper.setPivotX(tempTargetView, 0);
-        ViewHelper.setPivotY(tempTargetView, 0);
-        ViewHelper.setScaleX(tempTargetView, mScaleX);
-        ViewHelper.setScaleY(tempTargetView, mScaleY);
-        ViewHelper.setTranslationX(tempTargetView, mLeft);
-        ViewHelper.setTranslationY(tempTargetView, mTop);
+        ViewHelper.setPivotX(targetView, 0);
+        ViewHelper.setPivotY(targetView, 0);
+        ViewHelper.setScaleX(targetView, mScaleX);
+        ViewHelper.setScaleY(targetView, mScaleY);
+        ViewHelper.setTranslationX(targetView, mLeft);
+        ViewHelper.setTranslationY(targetView, mTop);
 
-        ViewPropertyAnimator.animate(tempTargetView).scaleX(1).scaleY(1).translationX(0).translationY(0).setListener(new Animator.AnimatorListener() {
+        ViewPropertyAnimator.animate(targetView).scaleX(1).scaleY(1).translationX(0).translationY(0).setListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
 
@@ -197,7 +177,7 @@ public class RevealActivityAnimationHelper implements Serializable {
 //                    ((CircleImageView) targetView).setBorderWidth(mTargetCircleImageViewBorderWidth);
 //                }
 
-                startRevealTransition(rootView, targetView, tempTargetView);
+                startRevealTransition(contentView, targetView);
                 if (mCallback != null) {
                     mCallback.onActivityEnterFinish();
                 }
@@ -221,8 +201,7 @@ public class RevealActivityAnimationHelper implements Serializable {
     }
 
 
-    protected void startRevealTransition(final ViewGroup rootView, final View targetView, final View tempTargetView) {
-        final ViewGroup contentView = (ViewGroup) rootView.getChildAt(0);
+    protected void startRevealTransition(final View contentView, final View targetView) {
         final Rect bounds = new Rect();
         contentView.getHitRect(bounds);
         int contentLocation[] = new int[2];
@@ -235,27 +214,6 @@ public class RevealActivityAnimationHelper implements Serializable {
 
         animator.setDuration(600);
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
-        animator.addListener(new SupportAnimator.AnimatorListener() {
-            @Override
-            public void onAnimationStart() {
-
-            }
-
-            @Override
-            public void onAnimationEnd() {
-                rootView.removeView(tempTargetView);
-            }
-
-            @Override
-            public void onAnimationCancel() {
-
-            }
-
-            @Override
-            public void onAnimationRepeat() {
-
-            }
-        });
         animator.start();
     }
 

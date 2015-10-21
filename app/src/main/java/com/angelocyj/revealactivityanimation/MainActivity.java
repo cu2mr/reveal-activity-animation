@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.angelocyj.library.RevealActivityAnimationHelper;
 
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(View view, int position) {
 
                 startActivity(new Intent(MainActivity.this, DetailActivity.class).putExtra(RevealActivityAnimationHelper.KEY_REVEAL_ACTIVITY_HELPER,
-                        new RevealActivityAnimationHelper(view, String.valueOf(mResArray[position]))));
+                        new RevealActivityAnimationHelper((ImageView) view, String.valueOf(mResArray[position]))));
 
                 overridePendingTransition(0, 0);
             }

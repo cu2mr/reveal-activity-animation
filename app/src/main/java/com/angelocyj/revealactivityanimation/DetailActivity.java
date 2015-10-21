@@ -3,6 +3,7 @@ package com.angelocyj.revealactivityanimation;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.angelocyj.library.RevealActivityAnimationHelper;
 
@@ -27,7 +28,7 @@ public class DetailActivity  extends AppCompatActivity {
 
         if (mHelper != null) {
             ViewGroup rootView = (ViewGroup) findViewById(R.id.reveal_linear_layout);
-            mHelper.onActivityCreate(rootView, rootView.findViewById(R.id.targetView), null);
+            mHelper.onActivityCreate(rootView, (ImageView) rootView.findViewById(R.id.targetView), null);
         }
     }
 }
