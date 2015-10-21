@@ -38,9 +38,8 @@ After you have to create special root layout to show in behind current Circular 
     </com.angelocyj.library.circularReveal.widget.RevealFrameLayout>
 
 
-startActivity(new Intent(MainActivity.this,     DetailActivity.class).putExtra(RevealActivityAnimationHelper.KEY_REVEAL_ACTIVITY_HELPER,
+
+                startActivity(new Intent(MainActivity.this, DetailActivity.class).putExtra(RevealActivityAnimationHelper.KEY_REVEAL_ACTIVITY_HELPER,
                         new RevealActivityAnimationHelper((ImageView) view, String.valueOf(mResArray[position]))));
 
                 overridePendingTransition(0, 0);
-                
-                
