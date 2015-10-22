@@ -4,7 +4,7 @@ An android activity animation like gewara with reveal effect.
 ![alt text](http://7xnpdq.com1.z0.glb.clouddn.com/reveal4.gif)
 
 # Note
-depends on Ozodrukh's animation util for CircularReveal animation for 2.3+ version
+depends on (https://github.com/ozodrukh/CircularReveal "Ozodrukh's") animation util for CircularReveal animation for 2.3+ version
 # Using
 
 After you have to create special root layout to show in behind current Circular Reveal animated view. The root layout have to be RevealFrameLayout
