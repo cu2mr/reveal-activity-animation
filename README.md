@@ -38,7 +38,7 @@ For a working implementation, have a look at the app module
         }
 
 
-4.   After you have to create special root layout to show in behind current Circular Reveal animated view. The root layout have to be RevealFrameLayout. To make the full screem be clipped, please make sure this root layout has only one viewgroup. For example:
+   After you have to create special root layout to show in behind current Circular Reveal animated view. The root layout have to be RevealFrameLayout. To make the full screem be clipped, please make sure this root layout has only one viewgroup. For example:
 
     <com.angelocyj.library.circularReveal.widget.RevealFrameLayout
         android:id="@+id/root_layout"
