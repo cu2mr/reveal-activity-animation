@@ -1,5 +1,6 @@
 # reveal-activity-animation
 An android activity animation like gewara with reveal effect
+![alt text](http://note.youdao.com/yws/res/8410/87BF8BFF7B2F4482BBFC044EEE6DCBA1)
 # Note
 depends on Ozodrukh's animation util for CircularReveal animation for 2.3+ version
 # Using
