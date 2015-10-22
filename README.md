@@ -20,8 +20,12 @@ For a working implementation, have a look at the app module
      overridePendingTransition(0, 0);
                 
 
-3. 4 In your onCreate method you need to recevie bundle and build animation with GuillotineAnimation.GuillotineBuilder
+3.  In your onCreate method you need to receive bundle and set transparent theme, build animation with RevealActivityAnimationHelper.onActivityCreate
 
+        if (mHelper != null) {
+            ViewGroup rootView = (ViewGroup) findViewById(R.id.root_layout);
+            mHelper.onActivityCreate(rootView, (ImageView) rootView.findViewById(R.id.targetView), null);
+        }
 
         if (getIntent().getExtras() != null) {
             mHelper = (RevealActivityAnimationHelper) getIntent().getSerializableExtra(RevealActivityAnimationHelper.KEY_REVEAL_ACTIVITY_HELPER);
