@@ -20,7 +20,7 @@ For a working implementation, have a look at the app module
         overridePendingTransition(0, 0);
                 
 
-3.  For the target activity, in your onCreate method you need to receive bundle and set transparent theme, build animation with **RevealActivityAnimationHelper.onActivityCreate**.
+3.  For the target activity, in your onCreate method you need to receive bundle and set the transparent theme, build animation with **RevealActivityAnimationHelper.onActivityCreate**.
 
     
         if (getIntent().getExtras() != null) {
@@ -33,7 +33,7 @@ For a working implementation, have a look at the app module
         setContentView(R.layout.activity_detail);
 
         if (mHelper != null) {
-            ViewGroup rootView = (ViewGroup) findViewById(R.id.root_layout);
+            RevealFrameLayout rootView = (RevealFrameLayout) findViewById(R.id.root_layout);
             mHelper.onActivityCreate(rootView, (ImageView) rootView.findViewById(R.id.targetView), null);
         }
 
