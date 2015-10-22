@@ -10,7 +10,7 @@ For a working implementation, have a look at the app module
 
 1. Include the library as local library project.
 
-2. You need to send RevealActivityAnimationHelper with intent as putextra and remove default transition animation of activity.
+2. You need to send **RevealActivityAnimationHelper** with intent as putextra and remove default transition animation of activity.
 
         
         startActivity(new Intent(MainActivity.this, DetailActivity.class)
