@@ -12,6 +12,7 @@ For a working implementation, have a look at the app module
 
 2. You need to RevealActivityAnimation object as extra
 
+
      startActivity(new Intent(MainActivity.this, DetailActivity.class)
                     .putExtra(RevealActivityAnimationHelper.KEY_REVEAL_ACTIVITY_HELPER,
                         new RevealActivityAnimationHelper(sourceView, imageUrl)));
@@ -20,6 +21,8 @@ For a working implementation, have a look at the app module
                 
 
 3. 4 In your onCreate method you need to recevie bundle and build animation with GuillotineAnimation.GuillotineBuilder
+
+
         if (getIntent().getExtras() != null) {
             mHelper = (RevealActivityAnimationHelper) getIntent().getSerializableExtra(RevealActivityAnimationHelper.KEY_REVEAL_ACTIVITY_HELPER);
             if (mHelper != null) {
