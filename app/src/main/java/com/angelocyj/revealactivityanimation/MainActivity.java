@@ -36,10 +36,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
 
+                // send RevealActivityAnimationHelper with intent as putExtra
                 startActivity(new Intent(MainActivity.this, DetailActivity.class).putExtra(RevealActivityAnimationHelper.KEY_REVEAL_ACTIVITY_HELPER,
                         new RevealActivityAnimationHelper((ImageView) view, String.valueOf(mResArray[position]))));
 
+                // remove default transition animation of activity
                 overridePendingTransition(0, 0);
+
             }
         });
         mRecyclerView.setAdapter(mAdapter);

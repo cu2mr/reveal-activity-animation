@@ -2,10 +2,10 @@ package com.angelocyj.revealactivityanimation;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.angelocyj.library.RevealActivityAnimationHelper;
+import com.angelocyj.library.circularReveal.widget.RevealFrameLayout;
 
 /**
  * 类描述：
@@ -27,8 +27,9 @@ public class DetailActivity  extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         if (mHelper != null) {
-            ViewGroup rootView = (ViewGroup) findViewById(R.id.reveal_linear_layout);
+            RevealFrameLayout rootView = (RevealFrameLayout) findViewById(R.id.root_layout);
             mHelper.onActivityCreate(rootView, (ImageView) rootView.findViewById(R.id.targetView), null);
         }
     }
+
 }

@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 
 import com.angelocyj.library.circularReveal.animation.SupportAnimator;
 import com.angelocyj.library.circularReveal.animation.ViewAnimationUtils;
+import com.angelocyj.library.circularReveal.widget.RevealFrameLayout;
 import com.angelocyj.library.util.UIUtil;
 import com.bumptech.glide.Glide;
 import com.nineoldandroids.animation.Animator;
@@ -34,11 +35,13 @@ import java.io.Serializable;
 public class RevealActivityAnimationHelper implements Serializable {
     public static final String KEY_REVEAL_ACTIVITY_HELPER = "REVEAL_ACTIVITY_HELPER";
     private static final int DEFAULT_TRANSFORM_TIME = 500;
-    // Default reveal color
+    /**
+     * Default reveal color
+     */
     private static final int DEFAULT_COLOR = 0xfff4f4f4;
 
     /**
-     * 要在targetView上展示的图片
+     * the image url will show in the targetView
      */
     private String mImageUrl;
 
@@ -78,13 +81,14 @@ public class RevealActivityAnimationHelper implements Serializable {
     }
 
     /**
-     * 在activity的OnCreate中调用
+     * invoked in onCreate method of activity
      *
-     * @param rootView   根布局，必须为RevealFrameLayout 或 RevealLinearLayout
-     * @param targetView 目标控件，视觉效果从前一个activity移动到新activity，层级有限制，与mContentView最多隔2级
-     * @param background 根布局背景，辅助alpha过度呈现
+     * @param rootView    root layout，have to be RevealFrameLayout
+     * @param targetView  target imageView，will transform from former activity to this new activity，
+     *                    it's layout level should not be too deep
+     * @param background  reveal background
      */
-    public void onActivityCreate(final ViewGroup rootView, final ImageView targetView, final Drawable background) {
+    public void onActivityCreate(final RevealFrameLayout rootView, final ImageView targetView, final Drawable background) {
 
         targetView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
@@ -121,7 +125,7 @@ public class RevealActivityAnimationHelper implements Serializable {
     }
 
     private void activityEnterAnim(final ViewGroup rootView, final ImageView targetView, final Drawable background) {
-        // 根布局下的第一个子布局，用于呈现内容
+        // overlay layout to show in behind current
         final ViewGroup contentView = (ViewGroup) rootView.getChildAt(0);
 
         UIUtil.invisibleChildrenView(contentView);
@@ -135,12 +139,12 @@ public class RevealActivityAnimationHelper implements Serializable {
             targetParentView.setBackgroundDrawable(null);
         }
 
-//        targetView.setVisibility(View.VISIBLE);
+        //targetView.setVisibility(View.VISIBLE);
 
         // create new imageView as temp view
         final ImageView tempTargetView = new ImageView(rootView.getContext());
         if (!TextUtils.isEmpty(mImageUrl)) {
-            if (URLUtil.isNetworkUrl(mImageUrl)){
+            if (URLUtil.isNetworkUrl(mImageUrl)) {
                 Glide.with(rootView.getContext()).load(mImageUrl).into(targetView);
                 Glide.with(rootView.getContext()).load(mImageUrl).into(tempTargetView);
             } else {
@@ -243,6 +247,7 @@ public class RevealActivityAnimationHelper implements Serializable {
 
             @Override
             public void onAnimationEnd() {
+                // remove temp target view
                 rootView.removeView(tempTargetView);
             }
 
