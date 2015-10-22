@@ -10,10 +10,7 @@ For a working implementation, have a look at the app module
 
 1. Include the library as local library project.
 
-2. Your hamburger on navigation menu must have exactly same coordinates as hamburger on ActionBar.
-
-
-First of all you have to upload animation submodule with git submodule update
+2. You need to RevealActivityAnimation object as extra
 
      startActivity(new Intent(MainActivity.this, DetailActivity.class)
                     .putExtra(RevealActivityAnimationHelper.KEY_REVEAL_ACTIVITY_HELPER,
@@ -22,8 +19,20 @@ First of all you have to upload animation submodule with git submodule update
      overridePendingTransition(0, 0);
                 
 
-3. In your onCreate method you need to config and build animation with GuillotineAnimation.GuillotineBuilder
+3. 4 In your onCreate method you need to recevie bundle and build animation with GuillotineAnimation.GuillotineBuilder
+        if (getIntent().getExtras() != null) {
+            mHelper = (RevealActivityAnimationHelper) getIntent().getSerializableExtra(RevealActivityAnimationHelper.KEY_REVEAL_ACTIVITY_HELPER);
+            if (mHelper != null) {
+                setTheme(R.style.AppThemeTransparentActivity);
+            }
+        }
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detail);
 
+        if (mHelper != null) {
+            ViewGroup rootView = (ViewGroup) findViewById(R.id.root_layout);
+            mHelper.onActivityCreate(rootView, (ImageView) rootView.findViewById(R.id.targetView), null);
+        }
 
 After you have to create special root layout to show in behind current Circular Reveal animated view. The root layout have to be RevealFrameLayout. To make the full screem be clipped, please make sure this root layout has only one viewgroup. For example:
 
