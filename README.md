@@ -9,7 +9,7 @@ depends on [Ozodrukh's](https://github.com/ozodrukh/CircularReveal "CircularReve
 First of all you have to upload animation submodule with git submodule update --init command
 
      startActivity(new Intent(MainActivity.this, DetailActivity.class).putExtra(RevealActivityAnimationHelper.KEY_REVEAL_ACTIVITY_HELPER,
-                        new RevealActivityAnimationHelper((ImageView) view, String.valueOf(mResArray[position]))));
+              new RevealActivityAnimationHelper(sourceView, imageUrl)));
 
      overridePendingTransition(0, 0);
                 
