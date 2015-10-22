@@ -10,7 +10,7 @@ First of all you have to upload animation submodule with git submodule update --
 
      startActivity(new Intent(MainActivity.this, DetailActivity.class)
                .putExtra(RevealActivityAnimationHelper.KEY_REVEAL_ACTIVITY_HELPER,
-              new RevealActivityAnimationHelper(sourceView, imageUrl)));
+                   new RevealActivityAnimationHelper(sourceView, imageUrl)));
 
      overridePendingTransition(0, 0);
                 
