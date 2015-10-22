@@ -10,7 +10,7 @@ For a working implementation, have a look at the app module
 
 1. Include the library as local library project.
 
-2. You need to RevealActivityAnimation object as extra
+2. You need to send RevealActivityAnimationHelper with intent as putextra.
 
         
         startActivity(new Intent(MainActivity.this, DetailActivity.class)
@@ -19,7 +19,7 @@ For a working implementation, have a look at the app module
         overridePendingTransition(0, 0);
                 
 
-3.  In your onCreate method you need to receive bundle and set transparent theme, build animation with RevealActivityAnimationHelper.onActivityCreate
+3.  For the target activity, in your onCreate method you need to receive bundle and set transparent theme, build animation with RevealActivityAnimationHelper.onActivityCreate
 
     
         if (getIntent().getExtras() != null) {
