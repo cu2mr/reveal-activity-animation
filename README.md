@@ -16,7 +16,7 @@ For a working implementation, have a look at the app module
             ViewGroup rootView = (ViewGroup) findViewById(R.id.root_layout);
             mHelper.onActivityCreate(rootView, (ImageView) rootView.findViewById(R.id.targetView), null);
         }
-     startActivity(new Intent(MainActivity.this, DetailActivity.class)
+        startActivity(new Intent(MainActivity.this, DetailActivity.class)
                     .putExtra(RevealActivityAnimationHelper.KEY_REVEAL_ACTIVITY_HELPER,
                         new RevealActivityAnimationHelper(sourceView, imageUrl)));
 
