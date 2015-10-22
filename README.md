@@ -16,6 +16,7 @@ For a working implementation, have a look at the app module
         startActivity(new Intent(MainActivity.this, DetailActivity.class)
                     .putExtra(RevealActivityAnimationHelper.KEY_REVEAL_ACTIVITY_HELPER,
                         new RevealActivityAnimationHelper(sourceView, imageUrl)));
+                        
         overridePendingTransition(0, 0);
                 
 
@@ -36,7 +37,7 @@ For a working implementation, have a look at the app module
             mHelper.onActivityCreate(rootView, (ImageView) rootView.findViewById(R.id.targetView), null);
         }
 
-After you have to create special root layout to show in behind current Circular Reveal animated view. The root layout have to be RevealFrameLayout. To make the full screem be clipped, please make sure this root layout has only one viewgroup. For example:
+        After you have to create special root layout to show in behind current Circular Reveal animated view. The root layout have to be RevealFrameLayout. To make the full screem be clipped, please make sure this root layout has only one viewgroup. For example:
 
     <com.angelocyj.library.circularReveal.widget.RevealFrameLayout
         android:id="@+id/root_layout"
@@ -65,5 +66,6 @@ After you have to create special root layout to show in behind current Circular 
         </FrameLayout>
     
     </com.angelocyj.library.circularReveal.widget.RevealFrameLayout>
+
 
 
