@@ -13,8 +13,7 @@ After you have to create special root layout to show in behind current Circular 
         android:id="@+id/root_layout"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white" >
+        android:layout_height="match_parent" >
     
         <FrameLayout
             android:layout_width="match_parent"
