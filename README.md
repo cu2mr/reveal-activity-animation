@@ -12,15 +12,11 @@ For a working implementation, have a look at the app module
 
 2. You need to RevealActivityAnimation object as extra
 
-        if (mHelper != null) {
-            ViewGroup rootView = (ViewGroup) findViewById(R.id.root_layout);
-            mHelper.onActivityCreate(rootView, (ImageView) rootView.findViewById(R.id.targetView), null);
-        }
+        
         startActivity(new Intent(MainActivity.this, DetailActivity.class)
                     .putExtra(RevealActivityAnimationHelper.KEY_REVEAL_ACTIVITY_HELPER,
                         new RevealActivityAnimationHelper(sourceView, imageUrl)));
-
-     overridePendingTransition(0, 0);
+                        overridePendingTransition(0, 0);
                 
 
 3.  In your onCreate method you need to receive bundle and set transparent theme, build animation with RevealActivityAnimationHelper.onActivityCreate
