@@ -3,6 +3,8 @@ An android activity animation like gewara with reveal effect.
 
 ![alt text](http://7xnpdq.com1.z0.glb.clouddn.com/reveal4.gif)
 
+[Sample APK](http://7xnpdq.com1.z0.glb.clouddn.com/app-debug-unaligned.apk)
+
 # Note
 depends on [Ozodrukh's](https://github.com/ozodrukh/CircularReveal "CircularReveal") animation util for CircularReveal animation for 2.3+ version
 # Using
