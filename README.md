@@ -6,7 +6,14 @@ An android activity animation like gewara with reveal effect.
 # Note
 depends on [Ozodrukh's](https://github.com/ozodrukh/CircularReveal "CircularReveal") animation util for CircularReveal animation for 2.3+ version
 # Using
-First of all you have to upload animation submodule with git submodule update --init command
+For a working implementation, have a look at the app module
+
+1. Include the library as local library project.
+
+2. Your hamburger on navigation menu must have exactly same coordinates as hamburger on ActionBar.
+
+
+First of all you have to upload animation submodule with git submodule update
 
      startActivity(new Intent(MainActivity.this, DetailActivity.class)
                     .putExtra(RevealActivityAnimationHelper.KEY_REVEAL_ACTIVITY_HELPER,
@@ -14,6 +21,10 @@ First of all you have to upload animation submodule with git submodule update --
 
      overridePendingTransition(0, 0);
                 
+
+3. In your onCreate method you need to config and build animation with GuillotineAnimation.GuillotineBuilder
+
+
 After you have to create special root layout to show in behind current Circular Reveal animated view. The root layout have to be RevealFrameLayout. To make the full screem be clipped, please make sure this root layout has only one viewgroup. For example:
 
     <com.angelocyj.library.circularReveal.widget.RevealFrameLayout
