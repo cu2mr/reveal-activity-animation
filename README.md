@@ -16,7 +16,7 @@ For a working implementation, have a look at the app module
         startActivity(new Intent(MainActivity.this, DetailActivity.class)
                     .putExtra(RevealActivityAnimationHelper.KEY_REVEAL_ACTIVITY_HELPER,
                         new RevealActivityAnimationHelper(sourceView, imageUrl)));
-                        overridePendingTransition(0, 0);
+        overridePendingTransition(0, 0);
                 
 
 3.  In your onCreate method you need to receive bundle and set transparent theme, build animation with RevealActivityAnimationHelper.onActivityCreate
